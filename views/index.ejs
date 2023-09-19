@@ -12,7 +12,7 @@
             const form = document.querySelector('form');
             const username = document.getElementById('username');
             const password = document.getElementById('password');
-            const submit = document.querySelector('input[type="submit"]');
+            const submit = document.getElementById('submit');
 
             password.addEventListener('input', () => {
                 console.log("password changed");
@@ -30,6 +30,11 @@
                     submit.disabled = true;
                 }
             });
+
+            submit.addEventListener('click', () => {
+                console.log("submit clicked");
+                submit_form();
+            });
         });
 
         function validate_password() {
@@ -41,6 +46,27 @@
             } else {
                 return false;
             }
+        }
+
+        // should be called on submit
+        function submit_form() {
+            // get the username and password
+            const usernameValue = username.value;
+            const passwordValue = password.value;
+            alert("Username: " + usernameValue + "\nPassword: " + passwordValue);
+
+            // send the username and password to the server by doing a get request to :3000/database?user=<user>&pass=&pass
+            fetch('http://localhost:3000/database/add?user=' + usernameValue + '&pass=' + passwordValue)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.success) {
+                        alert("Login successful");
+                    }
+                    else {
+                        alert("Login failed");
+                    }
+                });
         }
 
     </script>
@@ -75,10 +101,10 @@
             font-size: 16px;
             margin-bottom: 20px;
             padding: 10px;
-            width: 100%;
+            width: 80%;
         }
 
-        input[type="submit"] {
+        #submit {
             background-color: #4CAF50;
             border: none;
             border-radius: 3px;
@@ -86,7 +112,7 @@
             cursor: pointer;
             font-size: 16px;
             padding: 10px;
-            width: 100%;
+            width: 80%;
         }
 
         input[type="submit"]:hover {
@@ -96,14 +122,12 @@
 </head>
 
 <body>
-    <form>
-        <h2>Login Form</h2>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        <input type="submit" value="Login">
-    </form>
+    <h2>Submission Form</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+    <button id="submit">Submit</button>
 </body>
 
 </html>

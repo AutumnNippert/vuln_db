@@ -4,7 +4,10 @@
 
 const express = require('express');
 const app = express();
-const port = 8080;
+const port = 8880;
+const ip = "10.21.123.40";
+
+const http = require('http');
 
 app.set('view engine', 'ejs');
 
@@ -12,6 +15,6 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+app.listen(port, ip, () => {
+    console.log(`Server listening at http://${ip}:${port}`);
 });
