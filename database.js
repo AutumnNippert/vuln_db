@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const ip = "10.21.123.40";
 
 let database = [];
 
@@ -27,5 +26,5 @@ app.get('/database/add', (req, res) => { // we are gonna do this through get req
 });
 
 app.listen(port, ip, () => {
-    console.log(`Server listening at http://${ip}:${port}`);
+    console.log(`Server listening at http://localhost:${port}`);
 });
