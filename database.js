@@ -25,6 +25,6 @@ app.get('/database/add', (req, res) => { // we are gonna do this through get req
     res.json(database);
 });
 
-app.listen(port, ip, () => {
+app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
